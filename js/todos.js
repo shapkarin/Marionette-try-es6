@@ -11,7 +11,6 @@ export const Shirt = Backbone.Model.extend({
     defaults: {
         name: Faker.commerce.productName(),
         price: Faker.commerce.price(),
-        added: false,
         image: 'img/thumb-' + _(2).random() + '.jpg'
     }
 });
