@@ -20,7 +20,7 @@ let filterChannel = Radio.channel('page');
         onAddToCart: function () {
             console.log('add to cartCollection');
             console.log(this.model.toJSON());
-            //cartCollecion.create(this.model)
+            //cartCollecion.add(this.model)
         }
 
     });
