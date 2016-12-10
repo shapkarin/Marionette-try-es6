@@ -32,5 +32,4 @@ APP.on('start', function () {
     Backbone.history.start();
 });
 
-// start the APP app
 APP.start();

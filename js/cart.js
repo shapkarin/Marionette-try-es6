@@ -5,8 +5,6 @@ import _ from 'underscore'
 
 Backbone.LocalStorage = LocalStorage;
 
-// Item Model
-// ----------
 const CartItemModel = Backbone.Model.extend({
     defaults: {
         name: Faker.commerce.productName(),
@@ -19,8 +17,6 @@ const CartItemModel = Backbone.Model.extend({
     }
 });
 
-// CartList Collection
-// ---------------
 export const CartCollection = Backbone.Collection.extend({
     model: CartItemModel,
     localStorage: new Backbone.LocalStorage('items-backbone-marionette')

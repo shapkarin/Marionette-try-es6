@@ -20,11 +20,6 @@ export const ShirtView = Marionette.ItemView.extend({
 
 });
 
-// Item List View
-// --------------
-//
-// Controls the rendering of the list of items, including the
-// filtering of activs vs completed items for display.
 export const ListView = Backbone.Marionette.CompositeView.extend({
     template: '#template-todoListCompositeView',
     childView: ShirtView,
@@ -42,9 +37,6 @@ export const ListView = Backbone.Marionette.CompositeView.extend({
 
 });
 
-// Layout Header View
-// ------------------
-//
 export const Header = Marionette.ItemView.extend({
     template: '#template-header'
 });
