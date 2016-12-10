@@ -1,7 +1,3 @@
-# Backbone.Marionette ES6 TodoMVC Example
-
-This is an implementation of the [TodoMVC app](http://todomvc.com/) using Marionette and ES6 concepts.  It is not the official TodoMVC implementation for Marionette since it uses modules and other things that are outside of the scope of what TodoMVC attempts to show.  But it is useful for learning what a modern Marionette application might look like.
-
 **Libraries used**
 -----------------
 
@@ -31,4 +27,3 @@ python -m SimpleHTTPServer 8000
 ```
 
 The app will then be available at `http://localhost:8000`
-
