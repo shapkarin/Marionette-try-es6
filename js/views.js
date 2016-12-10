@@ -1,6 +1,7 @@
 import Marionette from 'backbone.marionette';
 import Backbone from 'backbone';
 import Radio from 'backbone.radio';
+import $ from 'jquery';
 
 let filterChannel = Radio.channel('page');
 
@@ -59,8 +60,19 @@ export const CatListView = Marionette.CompositeView.extend({
        all: 'render'
     },
 
+    events: {
+        'click .cd-cart-trigger': 'toggle'
+    },
+
+    toggle: function(event) {
+        this.$el.find('.cd-cart-container').toggleClass('cart-open');
+    },
+
     templateHelpers: function() {
-        return { len: this.collection.length };
+        return {
+            len: this.collection.length,
+            total: this.collection.reduce(function(c, v) { return parseInt(c) + parseInt(v.get("price")) }, 0)
+        };
     }
 });
 

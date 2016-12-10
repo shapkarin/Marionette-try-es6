@@ -881,9 +881,6 @@ Main Components
       -ms-transform: translateX(-50%) translateY(-50%);
           transform: translateX(-50%) translateY(-50%);
 }
-.cd-cart-trigger .count li:last-of-type {
-  visibility: hidden;
-}
 .cd-cart-trigger .count.update-count li:last-of-type {
   -webkit-animation: cd-qty-enter .15s;
           animation: cd-qty-enter .15s;

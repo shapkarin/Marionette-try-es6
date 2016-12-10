@@ -89549,6 +89549,10 @@
 
 	var _backboneRadio2 = _interopRequireDefault(_backboneRadio);
 
+	var _jquery = __webpack_require__(5);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
 	var filterChannel = _backboneRadio2['default'].channel('page');
 
 	var ShirtView = _backboneMarionette2['default'].ItemView.extend({
@@ -89609,8 +89613,21 @@
 	        all: 'render'
 	    },
 
+	    events: {
+	        'click .cd-cart-trigger': 'toggle'
+	    },
+
+	    toggle: function toggle(event) {
+	        this.$el.find('.cd-cart-container').toggleClass('cart-open');
+	    },
+
 	    templateHelpers: function templateHelpers() {
-	        return { len: this.collection.length };
+	        return {
+	            len: this.collection.length,
+	            total: this.collection.reduce(function (c, v) {
+	                return parseInt(c) + parseInt(v.get("price"));
+	            }, 0)
+	        };
 	    }
 	});
 
