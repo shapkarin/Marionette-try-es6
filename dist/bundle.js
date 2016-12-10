@@ -89601,13 +89601,28 @@
 
 	exports.Header = Header;
 	var CatItemView = _backboneMarionette2['default'].ItemView.extend({
-	    template: '#template-cart-item'
+	    template: '#template-cart-item',
+
+	    ui: {
+	        del: '.delete'
+	    },
+
+	    events: {
+	        'click @ui.del': 'deleteModel'
+	    },
+
+	    deleteModel: function deleteModel() {
+	        this.model.destroy();
+	    }
 	});
 
 	var CatListView = _backboneMarionette2['default'].CompositeView.extend({
 	    childView: CatItemView,
 	    template: '#template-cart-list',
 	    childViewContainer: '#cart-list',
+
+	    /*fast hack to not close the cart when list updates*/
+	    isOpen: false,
 
 	    collectionEvents: {
 	        all: 'render'
@@ -89619,6 +89634,7 @@
 
 	    toggle: function toggle(event) {
 	        this.$el.find('.cd-cart-container').toggleClass('cart-open');
+	        this.isOpen = !this.isOpen;
 	    },
 
 	    templateHelpers: function templateHelpers() {
@@ -89626,7 +89642,8 @@
 	            len: this.collection.length,
 	            total: this.collection.reduce(function (c, v) {
 	                return parseInt(c) + parseInt(v.get("price"));
-	            }, 0)
+	            }, 0),
+	            open: this.isOpen
 	        };
 	    }
 	});
@@ -89671,7 +89688,7 @@
 
 	// Item Model
 	// ----------
-	var CartModel = _backbone2['default'].Model.extend({
+	var CartItemModel = _backbone2['default'].Model.extend({
 	    defaults: {
 	        name: _Faker2['default'].commerce.productName(),
 	        price: _Faker2['default'].commerce.price(),
@@ -89683,11 +89700,10 @@
 	    }
 	});
 
-	exports.CartModel = CartModel;
 	// CartList Collection
 	// ---------------
 	var CartCollection = _backbone2['default'].Collection.extend({
-	    model: CartModel,
+	    model: CartItemModel,
 	    localStorage: new _backbone2['default'].LocalStorage('items-backbone-marionette')
 	});
 	exports.CartCollection = CartCollection;

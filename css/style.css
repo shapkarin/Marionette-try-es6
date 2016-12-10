@@ -1511,3 +1511,8 @@ h1 {
     font-size: 3.2rem;
   }
 }
+
+
+#cart-list .product {
+    margin-bottom: 10px;
+}

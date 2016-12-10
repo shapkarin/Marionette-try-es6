@@ -10,7 +10,7 @@ let filterChannel = Radio.channel('page');
         tagName: 'li',
         template: '#template-todoShirtView',
 
-        ui : {
+        ui: {
             add: '.add-to-cart'
         },
 
@@ -48,13 +48,28 @@ export const Header = Marionette.ItemView.extend({
 });
 
 const CatItemView = Marionette.ItemView.extend({
-    template: '#template-cart-item'
+    template: '#template-cart-item',
+
+    ui: {
+        del: '.delete'
+    },
+
+    events: {
+        'click @ui.del': 'deleteModel'
+    },
+
+    deleteModel: function() {
+        this.model.destroy();
+    }
 });
 
 export const CatListView = Marionette.CompositeView.extend({
     childView: CatItemView,
     template: '#template-cart-list',
     childViewContainer: '#cart-list',
+
+    /*fast hack to not close the cart when list updates*/
+    isOpen: false,
 
     collectionEvents: {
        all: 'render'
@@ -66,12 +81,14 @@ export const CatListView = Marionette.CompositeView.extend({
 
     toggle: function(event) {
         this.$el.find('.cd-cart-container').toggleClass('cart-open');
+        this.isOpen = !this.isOpen;
     },
 
     templateHelpers: function() {
         return {
             len: this.collection.length,
-            total: this.collection.reduce(function(c, v) { return parseInt(c) + parseInt(v.get("price")) }, 0)
+            total: this.collection.reduce(function(c, v) { return parseInt(c) + parseInt(v.get("price")) }, 0),
+            open: this.isOpen
         };
     }
 });
