@@ -35,7 +35,6 @@ export const ListView = Backbone.Marionette.CompositeView.extend({
             return false;
         }
         this.options.cartCollection.add(item.model.toJSON());
-        console.log(this.options.cartCollection);
     }
 
 });
@@ -51,13 +50,17 @@ const CatItemView = Marionette.ItemView.extend({
     template: '#template-cart-item'
 });
 
-export const CatListView = Marionette.CollectionView.extend({
+export const CatListView = Marionette.CompositeView.extend({
     childView: CatItemView,
     template: '#template-cart-list',
     childViewContainer: '#cart-list',
 
-    serializeData: function() {
-        return { len: this.collection.models.length }
+    collectionEvents: {
+       all: 'render'
+    },
+
+    templateHelpers: function() {
+        return { len: this.collection.length };
     }
 });
 

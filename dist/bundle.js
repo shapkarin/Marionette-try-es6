@@ -89583,7 +89583,6 @@
 	            return false;
 	        }
 	        this.options.cartCollection.add(item.model.toJSON());
-	        console.log(this.options.cartCollection);
 	    }
 
 	});
@@ -89601,13 +89600,17 @@
 	    template: '#template-cart-item'
 	});
 
-	var CatListView = _backboneMarionette2['default'].CollectionView.extend({
+	var CatListView = _backboneMarionette2['default'].CompositeView.extend({
 	    childView: CatItemView,
 	    template: '#template-cart-list',
 	    childViewContainer: '#cart-list',
 
-	    serializeData: function serializeData() {
-	        return { len: this.collection.models.length };
+	    collectionEvents: {
+	        all: 'render'
+	    },
+
+	    templateHelpers: function templateHelpers() {
+	        return { len: this.collection.length };
 	    }
 	});
 
@@ -89657,6 +89660,9 @@
 	        price: _Faker2['default'].commerce.price(),
 	        image: 'img/some.jpg',
 	        count: 1
+	    },
+	    initialize: function initialize() {
+	        this.save();
 	    }
 	});
 
