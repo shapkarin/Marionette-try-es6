@@ -11,13 +11,12 @@ export const Shirt = Backbone.Model.extend({
     defaults: {
         name: Faker.commerce.productName(),
         price: Faker.commerce.price(),
-        image: 'img/thumb-' + _(2).random() + '.jpg'
+        image: 'img/thumb-0.jpg'
     }
 });
 
 	// Todo Collection
 	// ---------------
 export const ShirtsList = Backbone.Collection.extend({
-    model: Shirt,
-    localStorage: new Backbone.LocalStorage('todos-backbone-marionette')
+    model: Shirt
 });

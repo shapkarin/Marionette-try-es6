@@ -16,10 +16,9 @@ export const CartModel = Backbone.Model.extend({
     }
 });
 
-	// CartList Collection
-	// ---------------
+// CartList Collection
+// ---------------
 export const CartCollection = Backbone.Collection.extend({
     model: CartModel,
-    localStorage: new Backbone.LocalStorage('cartList-backbone-marionette'),
-    comparator: 'id'
+    localStorage: new Backbone.LocalStorage('items-backbone-marionette')
 });

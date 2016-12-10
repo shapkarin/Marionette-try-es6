@@ -47,6 +47,20 @@ export const Header = Marionette.ItemView.extend({
     template: '#template-header'
 });
 
+const CatItemView = Marionette.ItemView.extend({
+    template: '#template-cart-item'
+});
+
+export const CatListView = Marionette.CollectionView.extend({
+    childView: CatItemView,
+    template: '#template-cart-list',
+    childViewContainer: '#cart-list',
+
+    serializeData: function() {
+        return { len: this.collection.models.length }
+    }
+});
+
 	// Layout Footer View
 	// ------------------
 export const Footer = Marionette.ItemView.extend({

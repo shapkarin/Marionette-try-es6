@@ -80,10 +80,9 @@
 
 	_application2['default'].on('start', function () {
 	    var shirts = new _todos.ShirtsList();
-	    var cartItems = new _cart.CartCollection([{ name: 'name', price: '1000' }, { name: 'name', price: '1000' }]);
-	    //cartItems.fetch();
+	    var cartItems = new _cart.CartCollection();
+	    cartItems.fetch();
 
-	    shirts.fetch();
 	    (0, _underscore2['default'])(9).times(function () {
 	        shirts.add({
 	            name: _Faker2['default'].commerce.productName(),
@@ -19208,7 +19207,7 @@
 	    defaults: {
 	        name: _Faker2['default'].commerce.productName(),
 	        price: _Faker2['default'].commerce.price(),
-	        image: 'img/thumb-' + (0, _underscore2['default'])(2).random() + '.jpg'
+	        image: 'img/thumb-0.jpg'
 	    }
 	});
 
@@ -19216,8 +19215,7 @@
 	// Todo Collection
 	// ---------------
 	var ShirtsList = _backbone2['default'].Collection.extend({
-	    model: Shirt,
-	    localStorage: new _backbone2['default'].LocalStorage('todos-backbone-marionette')
+	    model: Shirt
 	});
 	exports.ShirtsList = ShirtsList;
 
@@ -89484,6 +89482,7 @@
 	    el: '#todoapp',
 
 	    regions: {
+	        cart: '#test-cart',
 	        header: '#header',
 	        main: '#main',
 	        footer: '#footer'
@@ -89493,6 +89492,7 @@
 	        this.showHeader();
 	        this.showFooter();
 	        this.showTodoList();
+	        this.showCart();
 	    },
 
 	    showHeader: function showHeader() {
@@ -89500,6 +89500,13 @@
 	            collection: this.collection
 	        });
 	        this.showChildView('header', header);
+	    },
+
+	    showCart: function showCart() {
+	        var carList = new _views.CatListView({
+	            collection: this.options.cartCollection
+	        });
+	        this.showChildView('cart', carList);
 	    },
 
 	    showFooter: function showFooter() {
@@ -89590,6 +89597,21 @@
 	});
 
 	exports.Header = Header;
+	var CatItemView = _backboneMarionette2['default'].ItemView.extend({
+	    template: '#template-cart-item'
+	});
+
+	var CatListView = _backboneMarionette2['default'].CollectionView.extend({
+	    childView: CatItemView,
+	    template: '#template-cart-list',
+	    childViewContainer: '#cart-list',
+
+	    serializeData: function serializeData() {
+	        return { len: this.collection.models.length };
+	    }
+	});
+
+	exports.CatListView = CatListView;
 	// Layout Footer View
 	// ------------------
 	var Footer = _backboneMarionette2['default'].ItemView.extend({
@@ -89643,8 +89665,7 @@
 	// ---------------
 	var CartCollection = _backbone2['default'].Collection.extend({
 	    model: CartModel,
-	    localStorage: new _backbone2['default'].LocalStorage('cartList-backbone-marionette'),
-	    comparator: 'id'
+	    localStorage: new _backbone2['default'].LocalStorage('items-backbone-marionette')
 	});
 	exports.CartCollection = CartCollection;
 

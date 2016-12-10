@@ -11,10 +11,9 @@ import './filter';
 
     APP.on('start', function () {
         let shirts = new ShirtsList();
-        let cartItems = new CartCollection([{name: 'name', price: '1000'},{name: 'name', price: '1000'}]);
-        //cartItems.fetch();
+        let cartItems = new CartCollection();
+        cartItems.fetch();
 
-        shirts.fetch();
         _(9).times(() => {
             shirts.add({
                 name: Faker.commerce.productName(),
