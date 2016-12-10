@@ -11,7 +11,8 @@ export const CartModel = Backbone.Model.extend({
     defaults: {
         name: Faker.commerce.productName(),
         price: Faker.commerce.price(),
-        image: 'img/some.jpg'
+        image: 'img/some.jpg',
+        count: 1
     }
 });
 

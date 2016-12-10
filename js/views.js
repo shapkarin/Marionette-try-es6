@@ -9,8 +9,12 @@ let filterChannel = Radio.channel('page');
         tagName: 'li',
         template: '#template-todoShirtView',
 
+        ui : {
+            add: '.add-to-cart'
+        },
+
         triggers: {
-            'click img': 'do:AddToCart'
+            'click @ui.add': 'do:AddToCart'
         }
 
     });
@@ -26,10 +30,13 @@ export const ListView = Backbone.Marionette.CompositeView.extend({
     childViewContainer: '#todo-list',
 
     onChildviewDoAddToCart: function(item) {
-        //console.log(item.model.toJSON());
+        //don't add new shirt when it's added
+        if(this.options.cartCollection.findWhere({'name': item.model.toJSON().name })){
+            return false;
+        }
         this.options.cartCollection.add(item.model.toJSON());
         console.log(this.options.cartCollection);
-    },
+    }
 
 });
 

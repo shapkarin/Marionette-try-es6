@@ -89549,8 +89549,12 @@
 	    tagName: 'li',
 	    template: '#template-todoShirtView',
 
+	    ui: {
+	        add: '.add-to-cart'
+	    },
+
 	    triggers: {
-	        'click img': 'do:AddToCart'
+	        'click @ui.add': 'do:AddToCart'
 	    }
 
 	});
@@ -89567,7 +89571,10 @@
 	    childViewContainer: '#todo-list',
 
 	    onChildviewDoAddToCart: function onChildviewDoAddToCart(item) {
-	        //console.log(item.model.toJSON());
+	        //don't add new shirt when it's added
+	        if (this.options.cartCollection.findWhere({ 'name': item.model.toJSON().name })) {
+	            return false;
+	        }
 	        this.options.cartCollection.add(item.model.toJSON());
 	        console.log(this.options.cartCollection);
 	    }
@@ -89626,7 +89633,8 @@
 	    defaults: {
 	        name: _Faker2['default'].commerce.productName(),
 	        price: _Faker2['default'].commerce.price(),
-	        image: 'img/some.jpg'
+	        image: 'img/some.jpg',
+	        count: 1
 	    }
 	});
 
