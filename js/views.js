@@ -101,7 +101,7 @@ export const CatListView = Marionette.CompositeView.extend({
 
     templateHelpers: function() {
         return {
-            len: this.collection.length,
+            len: this.collection.reduce(function(c, v) { return parseInt(c) + parseInt(v.get("count")) }, 0),
             total: this.collection.reduce(function(c, v) { return parseInt(c) + parseInt(v.get("price") * v.get("count")) }, 0),
             open: this.isOpen
         };
