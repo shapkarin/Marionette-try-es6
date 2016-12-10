@@ -9,18 +9,8 @@ let filterChannel = Radio.channel('page');
         tagName: 'li',
         template: '#template-todoShirtView',
 
-        ui : {
-            add: '.add-to-cart'
-        },
-
-        events: {
-            'click @ui.add': 'onAddToCart'
-        },
-
-        onAddToCart: function () {
-            console.log('add to cartCollection');
-            console.log(this.model.toJSON());
-            //cartCollecion.add(this.model)
+        triggers: {
+            'click img': 'do:AddToCart'
         }
 
     });
@@ -35,9 +25,12 @@ export const ListView = Backbone.Marionette.CompositeView.extend({
     childView: ShirtView,
     childViewContainer: '#todo-list',
 
-    initialize: function() {
-        console.log(this)
-    }
+    onChildviewDoAddToCart: function(item) {
+        //console.log(item.model.toJSON());
+        this.options.cartCollection.add(item.model.toJSON());
+        console.log(this.options.cartCollection);
+    },
+
 });
 
 // Layout Header View

@@ -2,7 +2,7 @@ import APP from './application';
 import { Router } from './router';
 import { ShirtsList } from './todos';
 import { Root } from './layout'
-import { CartList } from './cart'
+import { CartCollection } from './cart'
 import Backbone from 'backbone';
 import Faker from 'Faker'
 import $ from 'jquery';
@@ -11,7 +11,8 @@ import './filter';
 
     APP.on('start', function () {
         let shirts = new ShirtsList();
-        let cartItems = new CartList([{name: 'name', price: '1000'},{name: 'name', price: '1000'}]);
+        let cartItems = new CartCollection([{name: 'name', price: '1000'},{name: 'name', price: '1000'}]);
+        //cartItems.fetch();
 
         shirts.fetch();
         _(9).times(() => {

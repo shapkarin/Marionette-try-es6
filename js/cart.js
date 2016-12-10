@@ -7,7 +7,7 @@ Backbone.LocalStorage = LocalStorage;
 
 	// Item Model
 	// ----------
-export const Item = Backbone.Model.extend({
+export const CartModel = Backbone.Model.extend({
     defaults: {
         name: Faker.commerce.productName(),
         price: Faker.commerce.price(),
@@ -17,8 +17,8 @@ export const Item = Backbone.Model.extend({
 
 	// CartList Collection
 	// ---------------
-export const CartList = Backbone.Collection.extend({
-    model: Item,
+export const CartCollection = Backbone.Collection.extend({
+    model: CartModel,
     localStorage: new Backbone.LocalStorage('cartList-backbone-marionette'),
     comparator: 'id'
 });

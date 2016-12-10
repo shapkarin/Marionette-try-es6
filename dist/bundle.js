@@ -80,7 +80,8 @@
 
 	_application2['default'].on('start', function () {
 	    var shirts = new _todos.ShirtsList();
-	    var cartItems = new _cart.CartList([{ some: 'name', 'else': 'other' }, { some: 'name2', 'else': 'other2' }]);
+	    var cartItems = new _cart.CartCollection([{ name: 'name', price: '1000' }, { name: 'name', price: '1000' }]);
+	    //cartItems.fetch();
 
 	    shirts.fetch();
 	    (0, _underscore2['default'])(9).times(function () {
@@ -19207,7 +19208,6 @@
 	    defaults: {
 	        name: _Faker2['default'].commerce.productName(),
 	        price: _Faker2['default'].commerce.price(),
-	        added: false,
 	        image: 'img/thumb-' + (0, _underscore2['default'])(2).random() + '.jpg'
 	    }
 	});
@@ -89549,18 +89549,8 @@
 	    tagName: 'li',
 	    template: '#template-todoShirtView',
 
-	    ui: {
-	        add: '.add-to-cart'
-	    },
-
-	    events: {
-	        'click @ui.add': 'onAddToCart'
-	    },
-
-	    onAddToCart: function onAddToCart() {
-	        console.log('add to cartCollection');
-	        console.log(this.model.toJSON());
-	        //cartCollecion.create(this.model)
+	    triggers: {
+	        'click img': 'do:AddToCart'
 	    }
 
 	});
@@ -89576,9 +89566,12 @@
 	    childView: ShirtView,
 	    childViewContainer: '#todo-list',
 
-	    initialize: function initialize() {
-	        console.log(this);
+	    onChildviewDoAddToCart: function onChildviewDoAddToCart(item) {
+	        //console.log(item.model.toJSON());
+	        this.options.cartCollection.add(item.model.toJSON());
+	        console.log(this.options.cartCollection);
 	    }
+
 	});
 
 	exports.ListView = ListView;
@@ -89629,7 +89622,7 @@
 
 	// Item Model
 	// ----------
-	var Item = _backbone2['default'].Model.extend({
+	var CartModel = _backbone2['default'].Model.extend({
 	    defaults: {
 	        name: _Faker2['default'].commerce.productName(),
 	        price: _Faker2['default'].commerce.price(),
@@ -89637,15 +89630,15 @@
 	    }
 	});
 
-	exports.Item = Item;
+	exports.CartModel = CartModel;
 	// CartList Collection
 	// ---------------
-	var CartList = _backbone2['default'].Collection.extend({
-	    model: Item,
+	var CartCollection = _backbone2['default'].Collection.extend({
+	    model: CartModel,
 	    localStorage: new _backbone2['default'].LocalStorage('cartList-backbone-marionette'),
 	    comparator: 'id'
 	});
-	exports.CartList = CartList;
+	exports.CartCollection = CartCollection;
 
 /***/ },
 /* 977 */
