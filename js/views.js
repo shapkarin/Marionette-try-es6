@@ -32,10 +32,12 @@ export const ListView = Backbone.Marionette.CompositeView.extend({
 
     onChildviewDoAddToCart: function(item) {
         //don't add new shirt when it's added
-        if(this.options.cartCollection.findWhere({'name': item.model.toJSON().name })){
-            return false;
+        const previusItem = this.options.cartCollection.findWhere({'name': item.model.toJSON().name });
+        if(previusItem){
+            previusItem.set('count', previusItem.get('count') + 1)
+        }else{
+            this.options.cartCollection.add(item.model.toJSON());
         }
-        this.options.cartCollection.add(item.model.toJSON());
     }
 
 });
