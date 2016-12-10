@@ -51,22 +51,7 @@
 		<ul id="todo-list" class="cd-gallery"></ul>
 	</script>
 
-	<script type="text/html" id="template-footer">
-		<ul id="filters">
-			<li class="all">
-				<a href="#/">All</a>
-			</li>
-			<li class="active">
-				<a href="#/some">Active</a>
-			</li>
-			<li class="completed">
-				<a href="#/route">Completed</a>
-			</li>
-		</ul>
-	</script>
-
 	<script type="text/html" id="template-cart-item">
-
 		<li class="product">
 			<div class="product-image">
 			<a href="#0">
@@ -74,17 +59,10 @@
 			</div>
 			<div class="product-details">
 				<h3><a href="#0"><%= name %></a></h3>
-				<span class="price">$<%= price %></span>
 				<div class="actions">
 					<a class="delete-item delete" style="cursor: pointer;">Delete</a>
-					<div class="quantity"><label for="cd-product-5">Qty</label>
-						<span class="select">
-							<select id="cd-product-5" name="quantity">
-								<option value="1">1</option><option value="2">2</option><option value="3">3</option>
-								<option value="4">4</option><option value="5">5</option><option value="6">6</option>
-								<option value="7">7</option><option value="8">8</option><option value="9">9</option>
-							</select>
-						</span>
+					<div class="quantity"><label for="cd-product-5">Qty:</label>
+						<input value="<%= count %>" style="width: 60px;" class="count" type="number" />
 					</div>
 				</div>
 			</div>
@@ -95,7 +73,7 @@
 	<script type="text/html" id="template-cart-list">
 		<div class="cd-cart-container <%= open ? 'cart-open' : '' %>">
 	    <!-- <div class="cd-cart-container cart-open"> -->
-	    	<a href="#0" class="cd-cart-trigger">
+	    	<a href="#/cart" class="cd-cart-trigger">
 	    		Cart
 	    		<ul class="count"> <!-- cart items count -->
 	    			<li><%= len %></li>
@@ -120,9 +98,6 @@
 	    		</div>
 	    	</div> <!-- .cd-cart -->
 	    </div>
-
-
-		cat list:
 		<div ></div>
 	</script>
 

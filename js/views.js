@@ -3,22 +3,22 @@ import Backbone from 'backbone';
 import Radio from 'backbone.radio';
 import $ from 'jquery';
 
-let filterChannel = Radio.channel('page');
+let pageChannel = Radio.channel('page');
 
-    export const ShirtView = Marionette.ItemView.extend({
+export const ShirtView = Marionette.ItemView.extend({
 
-        tagName: 'li',
-        template: '#template-todoShirtView',
+    tagName: 'li',
+    template: '#template-todoShirtView',
 
-        ui: {
-            add: '.add-to-cart'
-        },
+    ui: {
+        add: '.add-to-cart'
+    },
 
-        triggers: {
-            'click @ui.add': 'do:AddToCart'
-        }
+    triggers: {
+        'click @ui.add': 'do:AddToCart'
+    }
 
-    });
+});
 
 // Item List View
 // --------------
@@ -51,15 +51,28 @@ const CatItemView = Marionette.ItemView.extend({
     template: '#template-cart-item',
 
     ui: {
-        del: '.delete'
+        del: '.delete',
+        edit: '.count'
     },
 
     events: {
-        'click @ui.del': 'deleteModel'
+        'click @ui.del': 'deleteModel',
+        'keyup @ui.edit': 'onEditCount',
+        'change @ui.edit': 'onEditCount',
+    },
+
+    modelEvents: {
+        change: 'render'
     },
 
     deleteModel: function() {
         this.model.destroy();
+    },
+
+    onEditCount: function(event){
+        let val = $(event.target).val();
+        if (val == 0){ this.deleteModel() }
+        this.model.set({ count: val });
     }
 });
 
@@ -87,14 +100,8 @@ export const CatListView = Marionette.CompositeView.extend({
     templateHelpers: function() {
         return {
             len: this.collection.length,
-            total: this.collection.reduce(function(c, v) { return parseInt(c) + parseInt(v.get("price")) }, 0),
+            total: this.collection.reduce(function(c, v) { return parseInt(c) + parseInt(v.get("price") * v.get("count")) }, 0),
             open: this.isOpen
         };
     }
-});
-
-	// Layout Footer View
-	// ------------------
-export const Footer = Marionette.ItemView.extend({
-    template: '#template-footer'
 });

@@ -54,7 +54,7 @@
 
 	var _router = __webpack_require__(8);
 
-	var _todos = __webpack_require__(10);
+	var _shirts = __webpack_require__(10);
 
 	var _layout = __webpack_require__(974);
 
@@ -79,7 +79,7 @@
 	__webpack_require__(977);
 
 	_application2['default'].on('start', function () {
-	    var shirts = new _todos.ShirtsList();
+	    var shirts = new _shirts.ShirtsList();
 	    var cartItems = new _cart.CartCollection();
 	    cartItems.fetch();
 
@@ -123,8 +123,8 @@
 	// TodoMVC is global for developing in the console
 	// and functional testing.
 
-	var TodoMVC = new _backboneMarionette2['default'].Application();
-	exports['default'] = TodoMVC;
+	var ShirtsMarketplaceMVC = new _backboneMarionette2['default'].Application();
+	exports['default'] = ShirtsMarketplaceMVC;
 	module.exports = exports['default'];
 
 /***/ },
@@ -18797,7 +18797,7 @@
 
 	var _backboneRadio2 = _interopRequireDefault(_backboneRadio);
 
-	var filterChannel = _backboneRadio2['default'].channel('filter');
+	var pageChannel = _backboneRadio2['default'].channel('page');
 
 	var Router = _backbone2['default'].Router.extend({
 
@@ -18806,10 +18806,9 @@
 	    },
 
 	    // Set the filter to show complete or all items
-	    showPage: function showPage(filter) {
-	        console.log('showPage %s', filter);
-	        //let newFilter = filter && filter.trim() || 'all';
-	        //filterChannel.request('filterState').set('filter', newFilter);
+	    showPage: function showPage(page) {
+	        var newFilter = page && page.trim() || 'all';
+	        pageChannel.request('pageState').set('page', newFilter);
 	    }
 	});
 	exports.Router = Router;
@@ -89482,15 +89481,13 @@
 	    el: '#todoapp',
 
 	    regions: {
-	        cart: '#test-cart',
 	        header: '#header',
 	        main: '#main',
-	        footer: '#footer'
+	        cart: '#test-cart'
 	    },
 
 	    initialize: function initialize() {
 	        this.showHeader();
-	        this.showFooter();
 	        this.showTodoList();
 	        this.showCart();
 	    },
@@ -89507,13 +89504,6 @@
 	            collection: this.options.cartCollection
 	        });
 	        this.showChildView('cart', carList);
-	    },
-
-	    showFooter: function showFooter() {
-	        var footer = new _views.Footer({
-	            collection: this.collection
-	        });
-	        this.showChildView('footer', footer);
 	    },
 
 	    showTodoList: function showTodoList() {
@@ -89553,7 +89543,7 @@
 
 	var _jquery2 = _interopRequireDefault(_jquery);
 
-	var filterChannel = _backboneRadio2['default'].channel('page');
+	var pageChannel = _backboneRadio2['default'].channel('page');
 
 	var ShirtView = _backboneMarionette2['default'].ItemView.extend({
 
@@ -89604,15 +89594,30 @@
 	    template: '#template-cart-item',
 
 	    ui: {
-	        del: '.delete'
+	        del: '.delete',
+	        edit: '.count'
 	    },
 
 	    events: {
-	        'click @ui.del': 'deleteModel'
+	        'click @ui.del': 'deleteModel',
+	        'keyup @ui.edit': 'onEditCount',
+	        'change @ui.edit': 'onEditCount'
+	    },
+
+	    modelEvents: {
+	        change: 'render'
 	    },
 
 	    deleteModel: function deleteModel() {
 	        this.model.destroy();
+	    },
+
+	    onEditCount: function onEditCount(event) {
+	        var val = (0, _jquery2['default'])(event.target).val();
+	        if (val == 0) {
+	            this.deleteModel();
+	        }
+	        this.model.set({ count: val });
 	    }
 	});
 
@@ -89641,20 +89646,13 @@
 	        return {
 	            len: this.collection.length,
 	            total: this.collection.reduce(function (c, v) {
-	                return parseInt(c) + parseInt(v.get("price"));
+	                return parseInt(c) + parseInt(v.get("price") * v.get("count"));
 	            }, 0),
 	            open: this.isOpen
 	        };
 	    }
 	});
-
 	exports.CatListView = CatListView;
-	// Layout Footer View
-	// ------------------
-	var Footer = _backboneMarionette2['default'].ItemView.extend({
-	    template: '#template-footer'
-	});
-	exports.Footer = Footer;
 
 /***/ },
 /* 976 */
@@ -89732,26 +89730,26 @@
 	 * object, in Mn 3.0 this will be replaceable with
 	 * Marionette.Object without any external dependencies
 	 */
-	var FilterService = _marionetteService2['default'].extend({
+	var PageService = _marionetteService2['default'].extend({
 
 	    radioRequests: {
-	        'filter filterState': 'getFilterState'
+	        'page pageState': 'getPageState'
 	    },
 
 	    initialize: function initialize() {
-	        this.filterState = new _backbone2['default'].Model({
-	            filter: 'all'
+	        this.pageState = new _backbone2['default'].Model({
+	            filter: ''
 	        });
 	    },
 
-	    getFilterState: function getFilterState() {
-	        return this.filterState;
+	    getPageState: function getPageState() {
+	        return this.pageState;
 	    }
 
 	});
 
 	// We create the service as a singleton
-	var service = new FilterService();
+	var service = new PageService();
 
 /***/ },
 /* 978 */

@@ -9,23 +9,23 @@ import Backbone from 'backbone';
  * object, in Mn 3.0 this will be replaceable with
  * Marionette.Object without any external dependencies
  */
-const FilterService = Service.extend({
+const PageService = Service.extend({
 
     radioRequests: {
-        'filter filterState': 'getFilterState'
+        'page pageState': 'getPageState'
     },
 
     initialize: function() {
-        this.filterState =  new Backbone.Model({
-            filter: 'all'
+        this.pageState =  new Backbone.Model({
+            filter: ''
         });
     },
 
-    getFilterState: function() {
-        return this.filterState;
+    getPageState: function() {
+        return this.pageState;
     }
 
 });
 
 // We create the service as a singleton
-const service = new FilterService();
+const service = new PageService();

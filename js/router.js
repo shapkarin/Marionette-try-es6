@@ -1,7 +1,7 @@
 import Backbone from 'backbone';
 import Radio from 'backbone.radio';
 
-let filterChannel = Radio.channel('filter');
+let pageChannel = Radio.channel('page');
 
 export const Router = Backbone.Router.extend({
 
@@ -10,9 +10,8 @@ export const Router = Backbone.Router.extend({
     },
 
     // Set the filter to show complete or all items
-    showPage: function (filter) {
-        console.log('showPage %s', filter)
-        //let newFilter = filter && filter.trim() || 'all';
-        //filterChannel.request('filterState').set('filter', newFilter);
+    showPage: function (page) {
+        let newFilter = page && page.trim() || 'all';
+        pageChannel.request('pageState').set('page', newFilter);
     }
 });
