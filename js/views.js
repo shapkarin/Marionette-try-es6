@@ -3,12 +3,20 @@ import Backbone from 'backbone';
 import Radio from 'backbone.radio';
 import $ from 'jquery';
 
+//templates
+import headerTpl from './templates/header.tpl';
+import shirtTpl from './templates/shirt.tpl';
+import shirtsListTpl from './templates/shirtsList.tpl';
+import cartItemTpl from './templates/cartItem.tpl';
+import cartListTpl from './templates/cartList.tpl';
+
+
 let pageChannel = Radio.channel('page');
 
 export const ShirtView = Marionette.ItemView.extend({
 
     tagName: 'li',
-    template: '#template-todoShirtView',
+    template: shirtTpl,
 
     ui: {
         add: '.add-to-cart'
@@ -21,9 +29,9 @@ export const ShirtView = Marionette.ItemView.extend({
 });
 
 export const ListView = Backbone.Marionette.CompositeView.extend({
-    template: '#template-todoListCompositeView',
+    template: shirtsListTpl,
     childView: ShirtView,
-    childViewContainer: '#todo-list',
+    childViewContainer: '#shirts-list',
 
     onChildviewDoAddToCart: function(item) {
         //don't add new shirt when it's added
@@ -38,11 +46,11 @@ export const ListView = Backbone.Marionette.CompositeView.extend({
 });
 
 export const Header = Marionette.ItemView.extend({
-    template: '#template-header'
+    template: headerTpl
 });
 
 const CatItemView = Marionette.ItemView.extend({
-    template: '#template-cart-item',
+    template: cartItemTpl,
 
     ui: {
         del: '.delete',
@@ -72,7 +80,7 @@ const CatItemView = Marionette.ItemView.extend({
 
 export const CatListView = Marionette.CompositeView.extend({
     childView: CatItemView,
-    template: '#template-cart-list',
+    template: cartListTpl,
     childViewContainer: '#cart-list',
 
     /*fast hack to not close the cart when list updates*/

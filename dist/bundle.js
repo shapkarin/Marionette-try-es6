@@ -58,7 +58,7 @@
 
 	var _layout = __webpack_require__(974);
 
-	var _cart = __webpack_require__(976);
+	var _cart = __webpack_require__(981);
 
 	var _backbone = __webpack_require__(3);
 
@@ -76,7 +76,7 @@
 
 	var _underscore2 = _interopRequireDefault(_underscore);
 
-	__webpack_require__(977);
+	__webpack_require__(982);
 
 	_application2['default'].on('start', function () {
 	    var shirts = new _shirts.ShirtsList();
@@ -101,7 +101,6 @@
 	    _backbone2['default'].history.start();
 	});
 
-	// start the APP app
 	_application2['default'].start();
 
 /***/ },
@@ -119,9 +118,6 @@
 	var _backboneMarionette = __webpack_require__(2);
 
 	var _backboneMarionette2 = _interopRequireDefault(_backboneMarionette);
-
-	// TodoMVC is global for developing in the console
-	// and functional testing.
 
 	var ShirtsMarketplaceMVC = new _backboneMarionette2['default'].Application();
 	exports['default'] = ShirtsMarketplaceMVC;
@@ -19200,8 +19196,6 @@
 
 	_backbone2['default'].LocalStorage = _backboneLocalstorage2['default'];
 
-	// Todo Model
-	// ----------
 	var Shirt = _backbone2['default'].Model.extend({
 	    defaults: {
 	        name: _Faker2['default'].commerce.productName(),
@@ -19211,8 +19205,6 @@
 	});
 
 	exports.Shirt = Shirt;
-	// Todo Collection
-	// ---------------
 	var ShirtsList = _backbone2['default'].Collection.extend({
 	    model: Shirt
 	});
@@ -89543,12 +89535,34 @@
 
 	var _jquery2 = _interopRequireDefault(_jquery);
 
+	//templates
+
+	var _templatesHeaderTpl = __webpack_require__(976);
+
+	var _templatesHeaderTpl2 = _interopRequireDefault(_templatesHeaderTpl);
+
+	var _templatesShirtTpl = __webpack_require__(977);
+
+	var _templatesShirtTpl2 = _interopRequireDefault(_templatesShirtTpl);
+
+	var _templatesShirtsListTpl = __webpack_require__(978);
+
+	var _templatesShirtsListTpl2 = _interopRequireDefault(_templatesShirtsListTpl);
+
+	var _templatesCartItemTpl = __webpack_require__(979);
+
+	var _templatesCartItemTpl2 = _interopRequireDefault(_templatesCartItemTpl);
+
+	var _templatesCartListTpl = __webpack_require__(980);
+
+	var _templatesCartListTpl2 = _interopRequireDefault(_templatesCartListTpl);
+
 	var pageChannel = _backboneRadio2['default'].channel('page');
 
 	var ShirtView = _backboneMarionette2['default'].ItemView.extend({
 
 	    tagName: 'li',
-	    template: '#template-todoShirtView',
+	    template: _templatesShirtTpl2['default'],
 
 	    ui: {
 	        add: '.add-to-cart'
@@ -89561,15 +89575,10 @@
 	});
 
 	exports.ShirtView = ShirtView;
-	// Item List View
-	// --------------
-	//
-	// Controls the rendering of the list of items, including the
-	// filtering of activs vs completed items for display.
 	var ListView = _backbone2['default'].Marionette.CompositeView.extend({
-	    template: '#template-todoListCompositeView',
+	    template: _templatesShirtsListTpl2['default'],
 	    childView: ShirtView,
-	    childViewContainer: '#todo-list',
+	    childViewContainer: '#shirts-list',
 
 	    onChildviewDoAddToCart: function onChildviewDoAddToCart(item) {
 	        //don't add new shirt when it's added
@@ -89584,16 +89593,13 @@
 	});
 
 	exports.ListView = ListView;
-	// Layout Header View
-	// ------------------
-	//
 	var Header = _backboneMarionette2['default'].ItemView.extend({
-	    template: '#template-header'
+	    template: _templatesHeaderTpl2['default']
 	});
 
 	exports.Header = Header;
 	var CatItemView = _backboneMarionette2['default'].ItemView.extend({
-	    template: '#template-cart-item',
+	    template: _templatesCartItemTpl2['default'],
 
 	    ui: {
 	        del: '.delete',
@@ -89625,7 +89631,7 @@
 
 	var CatListView = _backboneMarionette2['default'].CompositeView.extend({
 	    childView: CatItemView,
-	    template: '#template-cart-list',
+	    template: _templatesCartListTpl2['default'],
 	    childViewContainer: '#cart-list',
 
 	    /*fast hack to not close the cart when list updates*/
@@ -89660,6 +89666,94 @@
 
 /***/ },
 /* 976 */
+/***/ function(module, exports) {
+
+	module.exports = function (obj) {
+	obj || (obj = {});
+	var __t, __p = '';
+	with (obj) {
+	__p += '<div>\n    <h2 style="text-align: center;font-size: 30px;">T-shirts market</h1>\n</div>\n';
+
+	}
+	return __p
+	}
+
+/***/ },
+/* 977 */
+/***/ function(module, exports) {
+
+	module.exports = function (obj) {
+	obj || (obj = {});
+	var __t, __p = '';
+	with (obj) {
+	__p += '<div class="cd-single-item">\n    <a>\n        <div class="cd-item-info">\n            <b>' +
+	((__t = ( name )) == null ? '' : __t) +
+	'</b>\n            <em>$' +
+	((__t = ( price )) == null ? '' : __t) +
+	'</em>\n        </div> <!-- cd-item-info -->\n        <img src="' +
+	((__t = ( image )) == null ? '' : __t) +
+	'" alt="Preview image">\n    </a>\n    <div class="cd-customization">\n        <button class="add-to-cart">\n            <em>Add to Cart</em>\n        </button>\n    </div> <!-- .cd-customization -->\n</div> <!-- .cd-single-item -->\n';
+
+	}
+	return __p
+	}
+
+/***/ },
+/* 978 */
+/***/ function(module, exports) {
+
+	module.exports = function (obj) {
+	obj || (obj = {});
+	var __t, __p = '';
+	with (obj) {
+	__p += '<ul id="shirts-list" class="cd-gallery"></ul>\n';
+
+	}
+	return __p
+	}
+
+/***/ },
+/* 979 */
+/***/ function(module, exports) {
+
+	module.exports = function (obj) {
+	obj || (obj = {});
+	var __t, __p = '';
+	with (obj) {
+	__p += '<li class="product">\n    <div class="product-image">\n    <a href="#0">\n        <img src="img/product-preview.png" alt="placeholder"></a>\n    </div>\n    <div class="product-details">\n        <h3><a href="#0">' +
+	((__t = ( name )) == null ? '' : __t) +
+	'</a></h3>\n        <div class="actions">\n            <a class="delete-item delete" style="cursor: pointer;">Delete</a>\n            <div class="quantity"><label for="cd-product-5">Qty:</label>\n                <input value="' +
+	((__t = ( count )) == null ? '' : __t) +
+	'" style="width: 60px;" class="count" type="number" />\n            </div>\n        </div>\n    </div>\n</li>\n';
+
+	}
+	return __p
+	}
+
+/***/ },
+/* 980 */
+/***/ function(module, exports) {
+
+	module.exports = function (obj) {
+	obj || (obj = {});
+	var __t, __p = '';
+	with (obj) {
+	__p += '<div class="cd-cart-container ' +
+	((__t = ( open ? 'cart-open' : '' )) == null ? '' : __t) +
+	'">\n<!-- <div class="cd-cart-container cart-open"> -->\n    <a href="#/cart" class="cd-cart-trigger">\n        Cart\n        <ul class="count"> <!-- cart items count -->\n            <li>' +
+	((__t = ( len )) == null ? '' : __t) +
+	'</li>\n        </ul> <!-- .count -->\n    </a>\n\n    <div class="cd-cart">\n        <div class="wrapper">\n            <header>\n                <h2>count: ' +
+	((__t = ( len )) == null ? '' : __t) +
+	'</h2>\n                <span class="undo">Item removed. <a href="#0">Undo</a></span>\n            </header>\n\n            <div class="body">\n                <ul id="cart-list">\n                </ul>\n            </div>\n\n            <footer>\n                <a href="#0" class="checkout btn"><em>Checkout - $<span>' +
+	((__t = ( total )) == null ? '' : __t) +
+	'</span></em></a>\n            </footer>\n        </div>\n    </div> <!-- .cd-cart -->\n</div>\n';
+
+	}
+	return __p
+	}
+
+/***/ },
+/* 981 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -89688,8 +89782,6 @@
 
 	_backbone2['default'].LocalStorage = _backboneLocalstorage2['default'];
 
-	// Item Model
-	// ----------
 	var CartItemModel = _backbone2['default'].Model.extend({
 	    defaults: {
 	        name: _Faker2['default'].commerce.productName(),
@@ -89702,8 +89794,6 @@
 	    }
 	});
 
-	// CartList Collection
-	// ---------------
 	var CartCollection = _backbone2['default'].Collection.extend({
 	    model: CartItemModel,
 	    localStorage: new _backbone2['default'].LocalStorage('items-backbone-marionette')
@@ -89711,14 +89801,14 @@
 	exports.CartCollection = CartCollection;
 
 /***/ },
-/* 977 */
+/* 982 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _marionetteService = __webpack_require__(978);
+	var _marionetteService = __webpack_require__(983);
 
 	var _marionetteService2 = _interopRequireDefault(_marionetteService);
 
@@ -89726,14 +89816,6 @@
 
 	var _backbone2 = _interopRequireDefault(_backbone);
 
-	/*
-	 * This is a simple service that maintains the
-	 * state of the filter, and passes it on
-	 * to any other parts of the code that request it
-	 * This currently uses Marionette-service for its service
-	 * object, in Mn 3.0 this will be replaceable with
-	 * Marionette.Object without any external dependencies
-	 */
 	var PageService = _marionetteService2['default'].extend({
 
 	    radioRequests: {
@@ -89756,7 +89838,7 @@
 	var service = new PageService();
 
 /***/ },
-/* 978 */
+/* 983 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**

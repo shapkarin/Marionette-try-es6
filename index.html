@@ -12,12 +12,6 @@
 	<title>Document</title>
 </head>
 <body>
-
-	<!--
-		********
-		TODO APP
-	 	********
-	-->
 	<section id="todoapp">
 		<header id="header"></header>
 		<section id="main"></section>
@@ -25,81 +19,6 @@
 		<div id="test-cart"></div>
 	</section>
 	<a style="padding: 0 0 10px 10px; color: #333;" href="https://codyhouse.co" target='_blank'>Thanks to Codyhouse's style</a>
-
-	<script type="text/html" id="template-header">
-		<h2 style="text-align: center;font-size: 30px;">T-shirts market</h1>
-	</script>
-
-	<script type="text/html" id="template-todoShirtView">
-		<div class="cd-single-item">
-			<a>
-				<div class="cd-item-info">
-					<b><%= name %></b>
-					<em>$<%= price %></em>
-				</div> <!-- cd-item-info -->
-				<img src="<%= image %>" alt="Preview image">
-			</a>
-			<div class="cd-customization">
-				<button class="add-to-cart">
-					<em>Add to Cart</em>
-				</button>
-			</div> <!-- .cd-customization -->
-		</div> <!-- .cd-single-item -->
-	</script>
-
-	<script type="text/html" id="template-todoListCompositeView">
-		<ul id="todo-list" class="cd-gallery"></ul>
-	</script>
-
-	<script type="text/html" id="template-cart-item">
-		<li class="product">
-			<div class="product-image">
-			<a href="#0">
-				<img src="img/product-preview.png" alt="placeholder"></a>
-			</div>
-			<div class="product-details">
-				<h3><a href="#0"><%= name %></a></h3>
-				<div class="actions">
-					<a class="delete-item delete" style="cursor: pointer;">Delete</a>
-					<div class="quantity"><label for="cd-product-5">Qty:</label>
-						<input value="<%= count %>" style="width: 60px;" class="count" type="number" />
-					</div>
-				</div>
-			</div>
-		</li>
-
-	</script>
-
-	<script type="text/html" id="template-cart-list">
-		<div class="cd-cart-container <%= open ? 'cart-open' : '' %>">
-	    <!-- <div class="cd-cart-container cart-open"> -->
-	    	<a href="#/cart" class="cd-cart-trigger">
-	    		Cart
-	    		<ul class="count"> <!-- cart items count -->
-	    			<li><%= len %></li>
-	    		</ul> <!-- .count -->
-	    	</a>
-
-	    	<div class="cd-cart">
-	    		<div class="wrapper">
-	    			<header>
-	    				<h2>count: <%= len %></h2>
-	    				<span class="undo">Item removed. <a href="#0">Undo</a></span>
-	    			</header>
-
-	    			<div class="body">
-	    				<ul id="cart-list">
-	    				</ul>
-	    			</div>
-
-	    			<footer>
-	    				<a href="#0" class="checkout btn"><em>Checkout - $<span><%= total %></span></em></a>
-	    			</footer>
-	    		</div>
-	    	</div> <!-- .cd-cart -->
-	    </div>
-		<div ></div>
-	</script>
 
 	<!-- application -->
 	<script src="dist/bundle.js"></script>
