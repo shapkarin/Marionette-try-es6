@@ -89623,7 +89623,7 @@
 
 	    onEditCount: function onEditCount(event) {
 	        var val = (0, _jquery2['default'])(event.target).val();
-	        if (val == 0) {
+	        if (val === 0) {
 	            this.deleteModel();
 	        }
 	        this.model.set({ count: val });
