@@ -74,7 +74,6 @@ const CatItemView = Marionette.ItemView.extend({
 
     onEditCount: function(event){
         let val = $(event.target).val();
-        if (val === 0){ this.deleteModel() }
         this.model.set({ count: val });
     }
 });
