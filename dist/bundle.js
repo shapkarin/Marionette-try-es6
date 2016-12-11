@@ -89585,6 +89585,7 @@
 	        var previusItem = this.options.cartCollection.findWhere({ 'name': item.model.toJSON().name });
 	        if (previusItem) {
 	            previusItem.set('count', previusItem.get('count') + 1);
+	            previusItem.save();
 	        } else {
 	            this.options.cartCollection.add(item.model.toJSON());
 	        }
