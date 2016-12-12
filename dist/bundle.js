@@ -89580,9 +89580,9 @@
 	    childView: ShirtView,
 	    childViewContainer: '#shirts-list',
 
+	    //событие когда сработает описано в строке 26
 	    onChildviewDoAddToCart: function onChildviewDoAddToCart(item) {
-	        //don't add new shirt when it's added
-	        var previusItem = this.options.cartCollection.findWhere({ 'name': item.model.toJSON().name });
+	        var previusItem = this.options.cartCollection.findWhere({ 'name': item.model.get('name') });
 	        if (previusItem) {
 	            previusItem.set('count', previusItem.get('count') + 1);
 	            previusItem.save();
@@ -89624,7 +89624,8 @@
 
 	    onEditCount: function onEditCount(event) {
 	        var val = (0, _jquery2['default'])(event.target).val();
-	        this.model.set({ count: val }, { silent: true });
+	        //мигает каждый keyup..
+	        this.model.set({ count: val });
 	    }
 	});
 
@@ -89633,7 +89634,7 @@
 	    template: _templatesCartListTpl2['default'],
 	    childViewContainer: '#cart-list',
 
-	    /*fast hack to not close the cart when list updates*/
+	    // простой способ держать козину открытой после перерисовки, можно вынести в модель
 	    isOpen: false,
 
 	    collectionEvents: {
@@ -89649,6 +89650,7 @@
 	        this.isOpen = !this.isOpen;
 	    },
 
+	    //тоже можно вынести в модель
 	    templateHelpers: function templateHelpers() {
 	        return {
 	            len: this.collection.reduce(function (c, v) {
