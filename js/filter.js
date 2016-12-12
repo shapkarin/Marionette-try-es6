@@ -1,3 +1,4 @@
+//не используется
 import Service from 'marionette-service';
 import Backbone from 'backbone';
 
@@ -9,7 +10,7 @@ const PageService = Service.extend({
 
     initialize: function() {
         this.pageState =  new Backbone.Model({
-            filter: ''
+            page: ''
         });
     },
 

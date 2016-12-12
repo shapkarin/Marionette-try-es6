@@ -1,17 +1,13 @@
 import Marionette from 'backbone.marionette';
 import Backbone from 'backbone';
-import Radio from 'backbone.radio';
 import $ from 'jquery';
 
-//templates
+//шаблоны
 import headerTpl from './templates/header.tpl';
 import shirtTpl from './templates/shirt.tpl';
 import shirtsListTpl from './templates/shirtsList.tpl';
 import cartItemTpl from './templates/cartItem.tpl';
 import cartListTpl from './templates/cartList.tpl';
-
-
-let pageChannel = Radio.channel('page');
 
 export const ShirtView = Marionette.ItemView.extend({
 
@@ -28,7 +24,8 @@ export const ShirtView = Marionette.ItemView.extend({
 
 });
 
-export const ListView = Backbone.Marionette.CompositeView.extend({
+//
+export const ShirtsListView = Backbone.Marionette.CompositeView.extend({
     template: shirtsListTpl,
     childView: ShirtView,
     childViewContainer: '#shirts-list',

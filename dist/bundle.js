@@ -89466,8 +89466,6 @@
 
 	var _views = __webpack_require__(975);
 
-	var filterChannel = _backboneRadio2['default'].channel('filter');
-
 	var Root = _backboneMarionette2['default'].LayoutView.extend({
 
 	    el: '#todoapp',
@@ -89491,18 +89489,18 @@
 	        this.showChildView('header', header);
 	    },
 
+	    showTodoList: function showTodoList() {
+	        this.showChildView('main', new _views.ShirtsListView({
+	            collection: this.collection,
+	            cartCollection: this.options.cartCollection
+	        }));
+	    },
+
 	    showCart: function showCart() {
 	        var carList = new _views.CatListView({
 	            collection: this.options.cartCollection
 	        });
 	        this.showChildView('cart', carList);
-	    },
-
-	    showTodoList: function showTodoList() {
-	        this.showChildView('main', new _views.ListView({
-	            collection: this.collection,
-	            cartCollection: this.options.cartCollection
-	        }));
 	    }
 	});
 	exports.Root = Root;
@@ -89527,15 +89525,11 @@
 
 	var _backbone2 = _interopRequireDefault(_backbone);
 
-	var _backboneRadio = __webpack_require__(9);
-
-	var _backboneRadio2 = _interopRequireDefault(_backboneRadio);
-
 	var _jquery = __webpack_require__(5);
 
 	var _jquery2 = _interopRequireDefault(_jquery);
 
-	//templates
+	//шаблоны
 
 	var _templatesHeaderTpl = __webpack_require__(976);
 
@@ -89557,8 +89551,6 @@
 
 	var _templatesCartListTpl2 = _interopRequireDefault(_templatesCartListTpl);
 
-	var pageChannel = _backboneRadio2['default'].channel('page');
-
 	var ShirtView = _backboneMarionette2['default'].ItemView.extend({
 
 	    tagName: 'li',
@@ -89575,7 +89567,8 @@
 	});
 
 	exports.ShirtView = ShirtView;
-	var ListView = _backbone2['default'].Marionette.CompositeView.extend({
+	//
+	var ShirtsListView = _backbone2['default'].Marionette.CompositeView.extend({
 	    template: _templatesShirtsListTpl2['default'],
 	    childView: ShirtView,
 	    childViewContainer: '#shirts-list',
@@ -89593,7 +89586,7 @@
 
 	});
 
-	exports.ListView = ListView;
+	exports.ShirtsListView = ShirtsListView;
 	var Header = _backboneMarionette2['default'].ItemView.extend({
 	    template: _templatesHeaderTpl2['default']
 	});
@@ -89805,6 +89798,7 @@
 /* 982 */
 /***/ function(module, exports, __webpack_require__) {
 
+	//не используется
 	'use strict';
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -89825,7 +89819,7 @@
 
 	    initialize: function initialize() {
 	        this.pageState = new _backbone2['default'].Model({
-	            filter: ''
+	            page: ''
 	        });
 	    },
 

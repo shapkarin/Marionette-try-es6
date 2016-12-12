@@ -1,8 +1,6 @@
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
-import {Header, ListView, CatListView} from './views';
-
-let filterChannel = Radio.channel('filter');
+import {Header, ShirtsListView, CatListView} from './views';
 
 export const Root = Marionette.LayoutView.extend({
 
@@ -27,17 +25,17 @@ export const Root = Marionette.LayoutView.extend({
         this.showChildView('header', header);
     },
 
+    showTodoList: function () {
+        this.showChildView('main', new ShirtsListView({
+            collection: this.collection,
+            cartCollection: this.options.cartCollection
+        }));
+    },
+
     showCart: function(){
         const carList = new CatListView({
             collection: this.options.cartCollection
         });
         this.showChildView('cart', carList);
-    },
-
-    showTodoList: function () {
-        this.showChildView('main', new ListView({
-            collection: this.collection,
-            cartCollection: this.options.cartCollection
-        }));
     },
 });
