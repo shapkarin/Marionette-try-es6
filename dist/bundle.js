@@ -89478,7 +89478,7 @@
 
 	    initialize: function initialize() {
 	        this.showHeader();
-	        this.showTodoList();
+	        this.showShirtsList();
 	        this.showCart();
 	    },
 
@@ -89489,7 +89489,7 @@
 	        this.showChildView('header', header);
 	    },
 
-	    showTodoList: function showTodoList() {
+	    showShirtsList: function showShirtsList() {
 	        this.showChildView('main', new _views.ShirtsListView({
 	            collection: this.collection,
 	            cartCollection: this.options.cartCollection
@@ -89567,7 +89567,7 @@
 	});
 
 	exports.ShirtView = ShirtView;
-	//
+	// можно легко добавить фильтр, можно использовать radio и services
 	var ShirtsListView = _backbone2['default'].Marionette.CompositeView.extend({
 	    template: _templatesShirtsListTpl2['default'],
 	    childView: ShirtView,
@@ -89606,7 +89606,7 @@
 	        'change @ui.edit': 'onEditCount'
 	    },
 
-	    //когда какой-либо атрибут в моделе измениться перерисовать
+	    //когда какой-либо атрибут в моделе изменится перерисовать
 	    modelEvents: {
 	        change: 'render'
 	    },

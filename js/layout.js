@@ -14,7 +14,7 @@ export const Root = Marionette.LayoutView.extend({
 
     initialize: function() {
         this.showHeader();
-        this.showTodoList();
+        this.showShirtsList();
         this.showCart()
     },
 
@@ -25,7 +25,7 @@ export const Root = Marionette.LayoutView.extend({
         this.showChildView('header', header);
     },
 
-    showTodoList: function () {
+    showShirtsList: function () {
         this.showChildView('main', new ShirtsListView({
             collection: this.collection,
             cartCollection: this.options.cartCollection
