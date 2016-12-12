@@ -24,7 +24,7 @@ export const ShirtView = Marionette.ItemView.extend({
 
 });
 
-// можно легко добавить фильтр, можно использовать radio и services
+// можно легко добавить фильтр, используя services и radio
 export const ShirtsListView = Backbone.Marionette.CompositeView.extend({
     template: shirtsListTpl,
     childView: ShirtView,
