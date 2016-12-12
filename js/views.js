@@ -30,7 +30,7 @@ export const ShirtsListView = Backbone.Marionette.CompositeView.extend({
     childView: ShirtView,
     childViewContainer: '#shirts-list',
 
-    //событие когда сработает описано в строке 26
+    //событие когда сработает описано в строке 22
     onChildviewDoAddToCart: function(item) {
         const previusItem = this.options.cartCollection.findWhere({'name': item.model.get('name') });
         if(previusItem){
