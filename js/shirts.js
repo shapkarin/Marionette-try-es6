@@ -5,7 +5,7 @@ import _ from 'underscore'
 
 Backbone.LocalStorage = LocalStorage;
 
-export const Shirt = Backbone.Model.extend({
+const Shirt = Backbone.Model.extend({
     defaults: {
         name: Faker.commerce.productName(),
         price: Faker.commerce.price(),

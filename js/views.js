@@ -24,13 +24,13 @@ export const ShirtView = Marionette.ItemView.extend({
 
 });
 
-// можно легко добавить фильтр, используя services и radio
+// можно добавить фильтр, используя services и radio
 export const ShirtsListView = Backbone.Marionette.CompositeView.extend({
     template: shirtsListTpl,
     childView: ShirtView,
     childViewContainer: '#shirts-list',
 
-    //событие когда сработает описано в строке 22
+    //в строке 22 описано событие
     onChildviewDoAddToCart: function(item) {
         const previusItem = this.options.cartCollection.findWhere({'name': item.model.get('name') });
         if(previusItem){
@@ -73,7 +73,7 @@ const CatItemView = Marionette.ItemView.extend({
     onEditCount: function(event){
         let val = $(event.target).val();
         //input становится не в фокусе каждый keyup
-        this.model.set({ count: val });
+        this.model.set('count', val);
     }
 });
 
@@ -98,7 +98,6 @@ export const CatListView = Marionette.CompositeView.extend({
         this.isOpen = !this.isOpen;
     },
 
-    //тоже можно вынести в модель
     templateHelpers: function() {
         return {
             len: this.collection.reduce(function(c, v) { return parseInt(c) + parseInt(v.get("count")) }, 0),

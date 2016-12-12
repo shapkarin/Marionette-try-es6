@@ -1,13 +1,13 @@
 import APP from './application';
 import { Router } from './router';
-import { ShirtsList } from './shirts';
 import { Root } from './layout'
+import { ShirtsList } from './shirts';
 import { CartCollection } from './cart'
+
 import Backbone from 'backbone';
 import Faker from 'Faker'
 import $ from 'jquery';
 import _ from 'underscore'
-import './filter';
 
 APP.on('start', function () {
     let shirts = new ShirtsList();
@@ -28,7 +28,6 @@ APP.on('start', function () {
     });
 
     let router = new Router();
-
     Backbone.history.start();
 });
 
