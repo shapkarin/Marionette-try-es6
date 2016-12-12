@@ -61,7 +61,7 @@ const CatItemView = Marionette.ItemView.extend({
         'change @ui.edit': 'onEditCount',
     },
 
-    //когда какой-либо атрибут в моделе измениться перерисовать
+    //когда какой-либо атрибут в моделе изменится перерисовать
     modelEvents: {
         change: 'render'
     },
