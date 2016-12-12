@@ -89617,7 +89617,7 @@
 
 	    onEditCount: function onEditCount(event) {
 	        var val = (0, _jquery2['default'])(event.target).val();
-	        //мигает каждый keyup..
+	        //input становится не в фокусе каждый keyup
 	        this.model.set({ count: val });
 	    }
 	});
@@ -89666,7 +89666,7 @@
 	obj || (obj = {});
 	var __t, __p = '';
 	with (obj) {
-	__p += '<div>\n    <h2 style="text-align: center;font-size: 30px;">T-shirts market</h1>\n</div>\n';
+	__p += '<div>\n    <h2 style="text-align: center;font-size: 30px;">Shirts market</h1>\n</div>\n';
 
 	}
 	return __p
