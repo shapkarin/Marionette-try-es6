@@ -72,7 +72,7 @@ const CatItemView = Marionette.ItemView.extend({
 
     onEditCount: function(event){
         let val = $(event.target).val();
-        //мигает каждый keyup..
+        //input становится не в фокусе каждый keyup
         this.model.set({ count: val });
     }
 });
