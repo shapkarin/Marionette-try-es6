@@ -119,8 +119,8 @@
 
 	var _backboneMarionette2 = _interopRequireDefault(_backboneMarionette);
 
-	var ShirtsMarketplaceMVC = new _backboneMarionette2['default'].Application();
-	exports['default'] = ShirtsMarketplaceMVC;
+	var App = new _backboneMarionette2['default'].Application();
+	exports['default'] = App;
 	module.exports = exports['default'];
 
 /***/ },
@@ -89567,13 +89567,13 @@
 	});
 
 	exports.ShirtView = ShirtView;
-	// можно легко добавить фильтр, можно использовать radio и services
+	// можно легко добавить фильтр, используя services и radio
 	var ShirtsListView = _backbone2['default'].Marionette.CompositeView.extend({
 	    template: _templatesShirtsListTpl2['default'],
 	    childView: ShirtView,
 	    childViewContainer: '#shirts-list',
 
-	    //событие когда сработает описано в строке 26
+	    //событие когда сработает описано в строке 22
 	    onChildviewDoAddToCart: function onChildviewDoAddToCart(item) {
 	        var previusItem = this.options.cartCollection.findWhere({ 'name': item.model.get('name') });
 	        if (previusItem) {

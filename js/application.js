@@ -1,4 +1,4 @@
 import Marionette from 'backbone.marionette';
 
-const ShirtsMarketplaceMVC = new Marionette.Application();
-export default ShirtsMarketplaceMVC;
+const App = new Marionette.Application();
+export default App;
