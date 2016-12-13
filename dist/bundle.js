@@ -18928,7 +18928,7 @@
 	    onChildviewDoAddToCart: function onChildviewDoAddToCart(item) {
 	        var previusItem = this.options.cartCollection.findWhere({ 'name': item.model.get('name') });
 	        if (previusItem) {
-	            previusItem.set('count', parseInt(previusItem.get('count')) + 1);
+	            previusItem.set('count', previusItem.get('count') + 1);
 	            previusItem.save();
 	        } else {
 	            this.options.cartCollection.add(item.model.toJSON());
@@ -18969,7 +18969,7 @@
 	    onEditCount: function onEditCount(event) {
 	        var val = (0, _jquery2['default'])(event.target).val();
 	        //input становится не в фокусе каждый keyup
-	        this.model.set('count', val);
+	        this.model.set('count', parseInt(val));
 	    }
 	});
 

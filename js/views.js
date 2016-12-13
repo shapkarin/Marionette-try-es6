@@ -34,7 +34,7 @@ export const ShirtsListView = Backbone.Marionette.CompositeView.extend({
     onChildviewDoAddToCart: function(item) {
         const previusItem = this.options.cartCollection.findWhere({'name': item.model.get('name') });
         if(previusItem){
-            previusItem.set('count', parseInt(previusItem.get('count')) + 1);
+            previusItem.set('count', previusItem.get('count') + 1);
             previusItem.save();
         }else{
             this.options.cartCollection.add(item.model.toJSON());
@@ -73,7 +73,7 @@ const CatItemView = Marionette.ItemView.extend({
     onEditCount: function(event){
         let val = $(event.target).val();
         //input становится не в фокусе каждый keyup
-        this.model.set('count', val);
+        this.model.set('count', parseInt(val));
     }
 });
 
