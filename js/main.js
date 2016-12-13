@@ -27,7 +27,7 @@ APP.on('start', function () {
         cartCollection: cartItems
     });
 
-    let router = new Router();
+    const router = new Router();
     Backbone.history.start();
 });
 
