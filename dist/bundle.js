@@ -68,10 +68,6 @@
 
 	var _Faker2 = _interopRequireDefault(_Faker);
 
-	var _jquery = __webpack_require__(5);
-
-	var _jquery2 = _interopRequireDefault(_jquery);
-
 	var _underscore = __webpack_require__(4);
 
 	var _underscore2 = _interopRequireDefault(_underscore);

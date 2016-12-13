@@ -6,7 +6,6 @@ import { CartCollection } from './cart'
 
 import Backbone from 'backbone';
 import Faker from 'Faker'
-import $ from 'jquery';
 import _ from 'underscore'
 
 APP.on('start', function () {
