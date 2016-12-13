@@ -68,6 +68,10 @@
 
 	var _Faker2 = _interopRequireDefault(_Faker);
 
+	var _jquery = __webpack_require__(5);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
 	var _underscore = __webpack_require__(4);
 
 	var _underscore2 = _interopRequireDefault(_underscore);
@@ -18924,7 +18928,7 @@
 	    onChildviewDoAddToCart: function onChildviewDoAddToCart(item) {
 	        var previusItem = this.options.cartCollection.findWhere({ 'name': item.model.get('name') });
 	        if (previusItem) {
-	            previusItem.set('count', previusItem.get('count') + 1);
+	            previusItem.set('count', parseInt(previusItem.get('count')) + 1);
 	            previusItem.save();
 	        } else {
 	            this.options.cartCollection.add(item.model.toJSON());
