@@ -1,5 +1,4 @@
 import Marionette from 'backbone.marionette';
-import Radio from 'backbone.radio';
 import {Header, ShirtsListView, CatListView} from './views';
 
 export const Root = Marionette.LayoutView.extend({

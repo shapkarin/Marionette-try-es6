@@ -8,6 +8,6 @@ export const Router = Backbone.Router.extend({
 
     // Set the filter to show complete or all items
     showPage: function (page) {
-        let newFilter = page && page.trim() || 'all';
+        let newPage = page && page.trim() || '/';
     }
 });
