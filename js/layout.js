@@ -18,9 +18,7 @@ export const Root = Marionette.LayoutView.extend({
     },
 
     showHeader: function () {
-        const header = new Header({
-            collection: this.collection
-        });
+        const header = new Header();
         this.showChildView('header', header);
     },
 
